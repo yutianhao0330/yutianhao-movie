@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yutianhao.movie.dao.MovieDao">
+	<select id="getMovieList" resultType="Movie">
+		select * from movie 
+		<where>
+			<if test="query.name!=null and query.name!=''">
+				and name like concat('%',#{query.name},'%') 
+			</if>
+			<if test="query.director!=null and query.director!=''">
+				and director like concat('%',#{query.director},'%') 
+			</if>
+			<if test="query.legend!=null and query.legend>0">
+				and legend=#{query.legend} 
+			</if>
+			<if test="query.startTime!=null and query.startTime!=''">
+				and showDate>=#{query.startTime}
+			</if>
+			<if test="query.endTime!=null and query.endTime!=''">
+				and showDate&lt;=#{query.endTime}
+			</if>
+			<if test="query.lowerPrice!=null and query.lowerPrice>0">
+				and price>=#{query.lowerPrice} 
+			</if>
+			<if test="query.upperPrice!=null and query.upperPrice>0">
+				and price&lt;=#{query.upperPrice} 
+			</if>
+			<if test="query.lowerLength!=null and query.lowerLength>0">
+				and timeLength>=#{query.lowerLength} 
+			</if>
+			<if test="query.upperLength!=null and query.upperLength>0">
+				and timeLength&lt;=#{query.upperLength} 
+			</if>
+		</where>
+		<if test="condition!=null and condition!=''">
+			order by ${condition} ${order}
+		</if>
+	</select>
+	<update id="convertState">
+		UPDATE movie SET state=1-state WHERE id=#{id} 
+	</update>
+	<delete id="deleteMovie">
+		delete from movie where id in 
+		<foreach collection="array" item="mid" open="(" close=")" separator=",">
+			#{mid}
+		</foreach>
+	</delete>
+</mapper>
