@@ -4,7 +4,7 @@ package com.yutianhao.movie.domain.query;
 /**
  * 
     * @ClassName: MovieQuery
-    * @Description: 封装电影查询信息的mojo类
+    * @Description: Movie视图类，VO类
     * @author thyu
     * @date 2020年3月23日
     *
