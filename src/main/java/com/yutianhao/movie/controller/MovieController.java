@@ -15,7 +15,7 @@ import com.yutianhao.movie.service.MovieService;
 /**
  * 
     * @ClassName: MovieController
-    * @Description: 电影的控制器,处理movie类相关请求
+    * @Description: 电影的控制器,处理movie类相关请求远程修改
     * @author thyu
     * @date 2020年3月23日
     *
